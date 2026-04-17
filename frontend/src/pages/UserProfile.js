@@ -26,7 +26,7 @@ const UserProfile = () => {
 
       const fetchProfile = async () => {
          try {
-            const res = await axios.get(`http://localhost:5000/user/${patientId}`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/user/${patientId}`);
             setFormData({
                name: res.data.name || '',
                age: res.data.age || '',
@@ -52,7 +52,7 @@ const UserProfile = () => {
       setSaving(true);
       try {
          const patientId = localStorage.getItem('patientId');
-         await axios.put(`http://localhost:5000/user/${patientId}`, formData);
+         await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/user/${patientId}`, formData);
          alert('Medical profile updated successfully');
       } catch (err) {
          alert('Failed to save profile');

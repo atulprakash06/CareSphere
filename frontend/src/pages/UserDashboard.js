@@ -23,7 +23,7 @@ const UserDashboard = () => {
     const fallback = { lat: 28.6139, lng: 77.2090 }; 
     
     const fetchHospitals = (lat, lng) => {
-      axios.get(`http://localhost:5000/nearest-hospital?lat=${lat}&lng=${lng}`)
+      axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/nearest-hospital?lat=${lat}&lng=${lng}`)
         .then(res => setHospitals(res.data))
         .catch(err => console.error("Error fetching hospitals: ", err));
     };

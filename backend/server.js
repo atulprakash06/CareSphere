@@ -105,7 +105,7 @@ app.post("/hospital", async (req, res) => {
                 <p>A new hospital named <b>${hospital.name}</b> has registered on CareSphere and is pending your verification.</p>
                 
                 <div style="margin: 30px 0;">
-                    <a href="http://localhost:5000/hospital/approve/${hospital._id}" style="padding: 12px 24px; background: #059669; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                    <a href="${process.env.BACKEND_URL || 'http://localhost:5000'}/hospital/approve/${hospital._id}" style="padding: 12px 24px; background: #059669; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
                        Verify and Approve Hospital
                     </a>
                 </div>
@@ -532,7 +532,7 @@ app.post("/contact", async (req, res) => {
    }
 });
 
-// Start server
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

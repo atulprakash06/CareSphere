@@ -49,16 +49,16 @@ const AdminPortal = () => {
 
     try {
       if (authView === 'login') {
-         const res = await axios.post('http://localhost:5000/hospital/login', { username, password });
+         const res = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/hospital/login`, { username, password });
          navigate(`/admin/manage/${res.data._id}`, { state: { hospital: res.data } });
       } 
       else if (authView === 'forgot-request') {
-         const res = await axios.post('http://localhost:5000/hospital/forgot-password', { email });
+         const res = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/hospital/forgot-password`, { email });
          setSuccessMsg(res.data.message);
          setAuthView('forgot-verify');
       } 
       else if (authView === 'forgot-verify') {
-         const res = await axios.post('http://localhost:5000/hospital/reset-password', { email, otp, newPassword: password });
+         const res = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/hospital/reset-password`, { email, otp, newPassword: password });
          setSuccessMsg(res.data.message);
          setAuthView('login');
          setPassword('');

@@ -81,7 +81,7 @@ const HospitalManage = () => {
         }
       };
 
-      await axios.put(`http://localhost:5000/hospital/${id}`, payload);
+      await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/hospital/${id}`, payload);
       setMessage('Facilities & Inventory updated successfully!');
       setTimeout(() => setMessage(''), 3000);
     } catch (err) {

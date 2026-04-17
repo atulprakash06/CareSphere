@@ -47,16 +47,16 @@ const UserAuth = () => {
          if (authView === 'login' || authView === 'register') {
             const endpoint = authView === 'login' ? '/user/login' : '/user/register';
             const payload = authView === 'login' ? { username, password } : { username, email, password };
-            const res = await axios.post(`http://localhost:5000${endpoint}`, payload);
+            const res = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}${endpoint}`, payload);
             
             localStorage.setItem('patientId', res.data._id);
             navigate('/user-profile');
          } else if (authView === 'forgot-request') {
-            const res = await axios.post('http://localhost:5000/user/forgot-password', { email });
+            const res = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/user/forgot-password`, { email });
             setSuccessMsg(res.data.message);
             setAuthView('forgot-verify');
          } else if (authView === 'forgot-verify') {
-            const res = await axios.post('http://localhost:5000/user/reset-password', { email, otp, newPassword: password });
+            const res = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/user/reset-password`, { email, otp, newPassword: password });
             setSuccessMsg(res.data.message);
             setUsername('');
             setPassword('');

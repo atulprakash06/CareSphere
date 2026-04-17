@@ -88,7 +88,7 @@ const AdminDashboard = () => {
         }
       };
 
-      await axios.post('http://localhost:5000/hospital', payload);
+      await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/hospital`, payload);
       setMessage('Success! Hospital registered. Please check email to verify and approve it.');
       
       // Reset form
